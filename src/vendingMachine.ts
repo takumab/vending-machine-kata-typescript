@@ -1,10 +1,11 @@
 import { CoinRepository } from "./coinRepository";
+import { CoinRepositoryInterface } from "./coinRepositoryInterface";
 
 export class VendingMachine {
     private items: string[];
-    private coinRepository: CoinRepository;
+    private coinRepository: CoinRepositoryInterface;
 
-    constructor(items: string[], coinRepository: CoinRepository) {
+    constructor(items: string[], coinRepository: CoinRepositoryInterface) {
         this.coinRepository = coinRepository;
         this.items = items;
     }

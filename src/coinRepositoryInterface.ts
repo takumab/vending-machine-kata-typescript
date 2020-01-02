@@ -1,3 +1,3 @@
 export interface CoinRepositoryInterface {
-    save(amount: number): void
+    save(amount: number): void;
 }

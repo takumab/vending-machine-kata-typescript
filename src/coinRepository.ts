@@ -1,7 +1,9 @@
 import { CoinRepositoryInterface } from "./coinRepositoryInterface";
 
 export class CoinRepository implements CoinRepositoryInterface{
+    private coins: Array<number> = [];
+
     save(amount: number): void {
-        throw new Error("Not implemented yet!")
+        this.coins.push(amount);
     }
 }
