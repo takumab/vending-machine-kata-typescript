@@ -1,12 +1,10 @@
 import { ItemRepository } from "./itemRepository";
 
-describe('Item Repository', function () {
-    it('should retrieve an item to dispense/vend', function () {
+describe('Item Repository', () => {
+    it('should retrieve an item to dispense/vend', () => {
         const itemRepository = new ItemRepository();
-        const itemName = "cola";
+        const itemNumber = 1;
 
-        const items = ["cola", "candy", "chips"];
-        itemRepository.load(items);
-        expect(itemRepository.getBy(itemName)).toEqual("cola")
+        expect(itemRepository.getBy(itemNumber)).toEqual("cola")
     });
 });

@@ -5,7 +5,6 @@ import { ItemRepositoryInterface } from "./itemRepositoryInterface";
 describe("Vending Machine", () => {
     const MockItemRepository = jest.fn<ItemRepositoryInterface, []>(() => ({
         getBy: jest.fn(),
-        load: jest.fn()
     }));
     const MockCoinRepo = jest.fn<CoinRepositoryInterface, []>(() => ({
         save: jest.fn()
@@ -14,8 +13,7 @@ describe("Vending Machine", () => {
     it('should accept deposits from customer in coins', () => {
         const mockItemRepository = new MockItemRepository();
         const mockCoinRepository = new MockCoinRepo();
-        const items = ["cola", "chips", "candy"];
-        const vendingMachine = new VendingMachine(items, mockCoinRepository, mockItemRepository);
+        const vendingMachine = new VendingMachine(mockCoinRepository, mockItemRepository);
         const amount = 100;
 
         vendingMachine.deposit(amount);
@@ -26,13 +24,12 @@ describe("Vending Machine", () => {
     it('should allow customer to choose item', () => {
         const mockItemRepository = new MockItemRepository();
         const mockCoinRepository = new MockCoinRepo();
-        const items = ["cola", "chips", "candy"];
-        const itemName = "cola";
-        const vendingMachine = new VendingMachine(items, mockCoinRepository, mockItemRepository);
+        const itemNumber = 1;
+        const vendingMachine = new VendingMachine(mockCoinRepository, mockItemRepository);
 
 
-        vendingMachine.choose("cola");
+        vendingMachine.choose(itemNumber);
 
-        expect(mockItemRepository.getBy).toHaveBeenCalledWith(itemName);
+        expect(mockItemRepository.getBy).toHaveBeenCalledWith(itemNumber);
     });
-})
+});
