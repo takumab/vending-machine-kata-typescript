@@ -1,5 +1,5 @@
 export class VmConsole {
-    vend(): void {
+    vend(_item): void {
         throw new Error("Not implemented yet!");
     }
 }
