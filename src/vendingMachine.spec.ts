@@ -5,7 +5,7 @@ import { VmConsole } from "./vmConsole";
 
 describe("Vending Machine", () => {
     const MockItemRepository = jest.fn<ItemRepositoryInterface, []>(() => ({
-        getBy: jest.fn(),
+        getBy: jest.fn(() => "cola"),
     }));
     const MockCoinRepo = jest.fn<CoinRepositoryInterface, []>(() => ({
         save: jest.fn()
@@ -41,9 +41,6 @@ describe("Vending Machine", () => {
     });
 
     it('should return item', () => {
-        // Not passing because ItemRepositoryInterface is just declaration or set up
-        // Wondering if I keep the mocks at this stage or not?
-        // The million dollar question
         const mockItemRepository = new MockItemRepository();
         const mockCoinRepository = new MockCoinRepo();
         const itemNumber = 1;
