@@ -1,15 +1,9 @@
 import { CoinRepositoryInterface } from "./coinRepositoryInterface";
-import { ItemRepositoryInterface } from "./itemRepositoryInterface";
-import { VmConsole } from "./vmConsole";
 
 export class VendingMachine {
     private coinRepository: CoinRepositoryInterface;
-    private vmConsole: VmConsole;
-    private itemRepository: ItemRepositoryInterface;
 
-    constructor(coinRepository: CoinRepositoryInterface, itemRepository: ItemRepositoryInterface, vmConsole: VmConsole) {
-        this.vmConsole = vmConsole;
-        this.itemRepository = itemRepository;
+    constructor(coinRepository: CoinRepositoryInterface) {
         this.coinRepository = coinRepository;
     }
 
@@ -17,9 +11,6 @@ export class VendingMachine {
         this.coinRepository.save(amount)
     }
 
-    choose(item: number): void {
-        let product = this.itemRepository.getBy(item);
-        console.log("inside choose function " + product);
-        this.vmConsole.vend(product);
-    }
+    // choose(item: number): void {
+    // }
 }
