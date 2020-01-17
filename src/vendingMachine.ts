@@ -13,7 +13,7 @@ export class VendingMachine {
 
     // choose(item: number): void {
     // }
-    insertCoin(coin: number) {
+    insertCoin(coin: number): void {
         if (coin === 1) throw new Error("Invalid coin");
         this.coinRepository.save(coin)
     }

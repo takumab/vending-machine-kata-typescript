@@ -7,11 +7,11 @@ describe("Vending Machine", () => {
     const MockCoinRepo = jest.fn<CoinRepositoryInterface, []>(() => ({
         save: jest.fn()
     }));
+    const mockCoinRepository = new MockCoinRepo();
+    const vendingMachine = new VendingMachine(mockCoinRepository);
 
 
-    it('should accepts valid coins', () => {
-        const mockCoinRepository = new MockCoinRepo();
-        const vendingMachine = new VendingMachine(mockCoinRepository);
+    it('should accept valid coins', () => {
         const quarter = 25;
 
         vendingMachine.insertCoin(quarter);
@@ -20,11 +20,16 @@ describe("Vending Machine", () => {
     });
 
      it('should not accept invalid coins', () => {
-        const mockCoinRepository = new MockCoinRepo();
-        const vendingMachine = new VendingMachine(mockCoinRepository);
         const INVALID_COIN = "Invalid coin";
         const penny = 1;
 
          expect(() => vendingMachine.insertCoin(penny)).toThrowError(INVALID_COIN);
+    });
+
+    it('should add to current amount when valid coins are inserted', () => {
+        const dime = 10;
+
+        vendingMachine.insertCoin(dime);
+        vendingMachine.insertCoin(dime);
     });
 });
