@@ -4,51 +4,27 @@ import { ItemRepositoryInterface } from "./itemRepositoryInterface";
 import { VmConsole } from "./vmConsole";
 
 describe("Vending Machine", () => {
-    const MockItemRepository = jest.fn<ItemRepositoryInterface, []>(() => ({
-        getBy: jest.fn(() => "cola"),
-    }));
     const MockCoinRepo = jest.fn<CoinRepositoryInterface, []>(() => ({
         save: jest.fn()
     }));
 
-    const MockVmConsole = jest.fn<VmConsole, []>(() => ({
-        vend: jest.fn()
-    }));
 
-    const mockVmConsole = new MockVmConsole();
-
-    it('should accept deposits from customer in coins', () => {
-        const mockItemRepository = new MockItemRepository();
+    it('should accepts valid coins', () => {
         const mockCoinRepository = new MockCoinRepo();
-        const vendingMachine = new VendingMachine(mockCoinRepository, mockItemRepository, mockVmConsole);
-        const amount = 100;
+        const vendingMachine = new VendingMachine(mockCoinRepository);
+        const quarter = 25;
 
-        vendingMachine.deposit(amount);
+        vendingMachine.insertCoin(quarter);
 
-        expect(mockCoinRepository.save).toHaveBeenCalledWith(amount);
+        expect(mockCoinRepository.save).toHaveBeenCalledWith(quarter);
     });
 
-    it('should allow customer to choose item and return item', () => {
-        const mockItemRepository = new MockItemRepository();
+     it('should not accept invalid coins', () => {
         const mockCoinRepository = new MockCoinRepo();
-        const itemNumber = 1;
-        const vendingMachine = new VendingMachine(mockCoinRepository, mockItemRepository, mockVmConsole);
+        const vendingMachine = new VendingMachine(mockCoinRepository);
+        const INVALID_COIN = "Invalid coin";
+        const penny = 1;
 
-
-        vendingMachine.choose(itemNumber);
-
-        expect(mockItemRepository.getBy).toHaveBeenCalledWith(itemNumber);
-    });
-
-    it('should return item', () => {
-        const mockItemRepository = new MockItemRepository();
-        const mockCoinRepository = new MockCoinRepo();
-        const itemNumber = 1;
-        const vendingMachine = new VendingMachine(mockCoinRepository, mockItemRepository, mockVmConsole);
-
-
-        vendingMachine.choose(itemNumber);
-
-        expect(mockVmConsole.vend).toHaveBeenCalledWith("cola");
+         expect(() => vendingMachine.insertCoin(penny)).toThrowError(INVALID_COIN);
     });
 });

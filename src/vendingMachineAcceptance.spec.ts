@@ -25,7 +25,7 @@ describe('Vending Machine Acceptance', () => {
         const coinRepository = new CoinRepository();
         const vendingMachine = new VendingMachine(coinRepository);
 
-        vendingMachine.insertCoins()
+        vendingMachine.insertCoin(25);
 
     });
 
